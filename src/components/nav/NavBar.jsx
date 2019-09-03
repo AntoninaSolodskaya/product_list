@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
+import NavBarView from './NavBarView';
 
 const NavBar = () => {
     return (
-        <div>
-            <h1>NavBar</h1>
-        </div>
+        <NavBarView />
     )
 }
 
