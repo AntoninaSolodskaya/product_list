@@ -3,9 +3,8 @@ import './LoginForm.css';
 
 class LoginForm extends Component {
     state = {
-        email: '',
         password: '',
-        name: ''
+        username: ''
     };
 
     handleChange = event => {
@@ -13,7 +12,7 @@ class LoginForm extends Component {
     };
 
     handleSubmit = () => {
-        console.log(this.state.email, this.state.password);
+        console.log(this.state.username, this.state.password);
     };
     render() {
         return (
@@ -26,18 +25,7 @@ class LoginForm extends Component {
                                 name='name'
                                 type='text'
                                 placeholder='Your Name'
-                                value={this.state.name}
-                                onChange={this.handleChange}
-                                required
-                            />
-                        </div>
-                        <div className='section'>
-                            <label>Email:</label>
-                            <input
-                                name='email'
-                                type='email'
-                                placeholder='Your Email'
-                                value={this.state.email}
+                                value={this.state.username}
                                 onChange={this.handleChange}
                                 required
                             />

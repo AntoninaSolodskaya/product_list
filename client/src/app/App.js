@@ -5,6 +5,7 @@ import NavBar from '../components/nav/NavBar';
 import Main from '../pages/main/Main';
 import RegisterModal from '../auth/register/modal/RegisterModal';
 import LoginModal from '../auth/login/modal/LoginModal';
+import ProductPage from '../pages/product/ProductPage';
 
 function App() {
     return (
@@ -22,6 +23,11 @@ function App() {
                     exact
                     path='/login'
                     render={props => <LoginModal {...props} />}
+                />
+                <Route
+                    exact
+                    path='/product/:id'
+                    render={props => <ProductPage {...props} />}
                 />
             </Switch>
         </div>

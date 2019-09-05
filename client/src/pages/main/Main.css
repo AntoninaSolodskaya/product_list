@@ -1,0 +1,21 @@
+.main-wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-title {
+   margin: 0 auto;
+   padding-top: 20px;
+   font-family: 'Niconne', cursive;
+}
+
+.main-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 5px;
+    max-width: 1140px;
+}
