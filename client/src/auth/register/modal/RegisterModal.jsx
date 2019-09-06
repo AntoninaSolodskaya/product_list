@@ -15,7 +15,7 @@ class RegisterModal extends Component {
                         <button onClick={this.closeModal}>X</button>
                     </div>
                     <h2>Register</h2>
-                    <RegisterForm closeModal={this.closeModal} />
+                    <RegisterForm />
                 </div>
             </div>
         );

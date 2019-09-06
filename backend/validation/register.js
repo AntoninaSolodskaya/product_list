@@ -10,6 +10,10 @@ module.exports = function validateRegisterInput(data) {
     errors.name = "Name field is required";
   }
 
+  if (!Validator.isLength(data.name, { min: 3, max: 30 })) {
+    errors.password = "Password must be at least 3 characters";
+  }
+
 // Password checks
   if (Validator.isEmpty(data.password)) {
     errors.password = "Password field is required";

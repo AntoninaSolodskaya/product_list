@@ -8,12 +8,12 @@ class Product extends Component {
         return (
             <div className='product-section'>
                 <div className='image-wrap'>
-                    <Link to={`/product/${product.Id}`}>
-                        <img src={product.Image} alt=''></img>
+                    <Link to={`/product/${product._id}`}>
+                        <img src={product.image} alt=''></img>
                     </Link>
                 </div>
                 <p className='title'>
-                    <Link to={`/product/${product.Id}`} className="title-link">{product.Title}</Link>
+                    <Link to={`/product/${product._id}`} className="title-link">{product.title}</Link>
                 </p>
             </div>
         );

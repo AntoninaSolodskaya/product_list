@@ -1,53 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import setAuthToken from '../../utils/setAuthToken';
 import Product from '../product/Product';
+import { loadProducts } from '../product/productActions';
 import './Main.css';
 
+const mapState = state => ({
+    products: state.products,
+    loading: state.async.loading
+});
+
+const actions = {
+    loadProducts
+};
+
 class Main extends Component {
-    state = {
-        products: [
-            {
-                Id: '1',
-                Title: 'Some Title',
-                Image:
-                    'https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?cs=srgb&dl=colorful-colourful-forest-33109.jpg&fm=jpg',
-                Text:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-            },
-            {
-                Id: '2',
-                Title: 'Second Product',
-                Image:
-                    'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-                Text:
-                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-            }
-        ],
-        isLoading: true
-    };
-
-    // loadProducts = () => {
-    //     axios
-    //         .get('http://smktesting.herokuapp.com/products/')
-    //         .then(response =>
-    //             response.data.results.map(product => console.log(product))
-    //         )
-    //         .then(products => {
-    //             this.setState({
-    //                 products,
-    //                 isLoading: false
-    //             });
-    //         })
-
-    //         .catch(error => this.setState({ error, isLoading: false }));
-    // };
-
-    // componentDidMount() {
-    //     this.loadProducts();
-    // }
+    componentDidMount() {
+        const token = localStorage.getItem('token');
+        setAuthToken(token);
+        console.log('token', token);
+        this.props.loadProducts();
+    }
 
     render() {
-        const { products } = this.state;
+        const { products } = this.props;
         console.log(products);
         return (
             <div className='main-wrap'>
@@ -58,9 +34,13 @@ class Main extends Component {
                             <Product product={product} key={i} />
                         ))}
                 </div>
+               
             </div>
         );
     }
 }
 
-export default Main;
+export default connect(
+    mapState,
+    actions
+)(Main);

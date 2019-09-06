@@ -1,12 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://smktesting.herokuapp.com/'
+    baseURL: "/api"
 });
-
-instance.defaults.headers.common['Authorization'] = localStorage.getItem(
-    'token'
-);
 
 instance.interceptors.response.use(
     response => {

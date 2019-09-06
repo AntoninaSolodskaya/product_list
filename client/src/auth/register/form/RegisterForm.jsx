@@ -1,106 +1,88 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import instance from '../../../utils/api';
+import { withRouter, Link } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+import CustomInput from '../../CustomInput';
+import { connect } from 'react-redux';
+import { registerUser } from '../../authActions';
 import './RegisterForm.css';
 
+const mapState = state => ({
+    auth: state.auth
+});
+
+const actions = {
+    registerUser
+};
+
+const validate = values => {
+    const errors = {};
+
+    if (!values.name) {
+        errors.name = 'Required';
+    } else if (values.name.length < 3) {
+        errors.name = 'Name should be at least 3 characters long';
+    }
+
+    if (!values.password) {
+        errors.password = 'Required';
+    } else if (values.password.length < 6) {
+        errors.password = 'Password should be at least 6 characters long';
+    }
+    return errors;
+};
+
 class RegisterForm extends Component {
-    state = {
-        username: '',
-        password: '',
-        userError: '',
-        passwordError: ''
-    };
-
-    handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
-    };
-
-    handleSubmit = e => {
-        const { username, password } = this.state;
-        e.preventDefault();
-
-        const registerdata = {
-            username,
-            password
-        };
-
-        localStorage.setItem('username', username);
-        this.props.closeModal();
-    };
-
-    validateName = () => {
-        const { username } = this.state;
-        this.setState({
-            userError:
-                username.length > 3
-                    ? null
-                    : 'Email must be longer than 3 characters'
-        });
-    };
-    validatePassword = () => {
-        const { password } = this.state;
-        this.setState({
-            passwordError:
-                password.length > 3
-                    ? null
-                    : 'Password must be longer than 3 characters'
-        });
-    };
-
     render() {
-        const { username, password, userError, passwordError } = this.state;
+        const {
+            registerUser,
+            pristine,
+            handleSubmit,
+            submitting,
+            auth
+        } = this.props;
+
+        const isErr = auth.isErr;
         return (
             <div className='wrap'>
-                <form
-                    onSubmit={this.handleSubmit}
-        
-                >
+                <form onSubmit={handleSubmit(registerUser)}>
                     <div className='container'>
                         <div className='section'>
-                            <label>Name:</label>
-                            <input
-                                name='username'
+                            <Field
+                                name='name'
+                                label='Your name'
                                 type='text'
-                                placeholder='Your Name'
-                                value={username}
-                                onChange={this.handleChange}
-                                className={`form-control ${
-                                    userError ? 'is-invalid' : ''
-                                }`}
-                                onBlur={this.validateName}
+                                className='form-control'
+                                component={CustomInput}
                             />
-                            <div
-                                className='invalid-feedback'
-                                style={{ color: '#FF0000' }}
-                            >
-                                {userError}
-                            </div>
-                        </div>
-                        <div className='section'>
-                            <label>Password:</label>
-                            <input
+
+                            <Field
                                 name='password'
+                                label='Your password'
+                                group
                                 type='password'
-                                placeholder='Your Password'
-                                value={password}
-                                onChange={this.handleChange}
-                                className={`form-control ${
-                                    passwordError ? 'is-invalid' : ''
-                                }`}
-                                onBlur={this.validatePassword}
+                                className='form-control'
+                                component={CustomInput}
                             />
-                            <div
-                                className='invalid-feedback'
-                                style={{ color: '#FF0000' }}
-                            >
-                                {passwordError}
-                            </div>
+
+                            {isErr && (
+                                <span>
+                                    It's password or name already exists
+                                </span>
+                            )}
                         </div>
+
                         <div className='wrap-btn'>
-                            <button className='form-btn' type='submit'>
+                            <button
+                                className='form-btn'
+                                type='submit'
+                                disabled={pristine || submitting}
+                            >
                                 Sign Up
                             </button>
+                            <p className="redirect">
+                                Have an account?
+                                <Link to='/login' className='context'>Log in</Link>
+                            </p>
                         </div>
                     </div>
                 </form>
@@ -108,4 +90,8 @@ class RegisterForm extends Component {
         );
     }
 }
-export default withRouter(RegisterForm);
+
+export default connect(
+    mapState,
+    actions
+)(reduxForm({ form: 'register', validate })(RegisterForm));

@@ -3,12 +3,15 @@ import LoginForm from '../form/LoginForm';
 import './LoginModal.css';
 
 class LoginModal extends Component {
+    closeModal = () => {
+        this.props.history.goBack();
+      };
     render() {
         return (
             <div className='modal-wrap'>
                 <div className='modal'>
                     <div className='block-btn'>
-                        <button>X</button>
+                        <button  onClick={this.closeModal}>X</button>
                     </div>
                     <h2>Login</h2>
                     <LoginForm />
