@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import setAuthToken from '../../utils/setAuthToken';
 import Product from '../product/Product';
 import { loadProducts } from '../product/productActions';
-import LoadingComponent from '../../loader/LoadingComponent';
+import LoadingComponent from '../loader/LoadingComponent';
 import './Main.css';
 
 const mapState = state => ({
     products: state.products,
-    loading: state.async.loading
+    loading: state.async.loading,
+    comments: state.comments
 });
 
 const actions = {
@@ -23,7 +24,7 @@ class Main extends Component {
     }
 
     render() {
-        const { products, loading } = this.props;
+        const { products, loading, comments } = this.props;
         if (loading) {
             return <LoadingComponent />;
         } else {
@@ -33,7 +34,7 @@ class Main extends Component {
                     <div className='main-block'>
                         {products &&
                             products.map((product, i) => (
-                                <Product product={product} key={i} />
+                                <Product product={product} key={i} comments={comments} />
                             ))}
                     </div>
                 </div>

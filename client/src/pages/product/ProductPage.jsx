@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ProductPage.css';
-import CommentsPage from '../../comments/CommentsPage';
+import CommentsPage from '../comments/CommentsPage';
 
 const mapState = (state, ownProps) => {
+   
     const productId = ownProps.match.params.id;
     let product = {};
 
@@ -24,7 +25,8 @@ class ProductPage extends Component {
     };
 
     render() {
-        const { product } = this.props;
+        const { product, comments } = this.props;
+        console.log("comments", comments)
         return (
             <div className='wrapper'>
                 <div className='container'>
@@ -41,6 +43,7 @@ class ProductPage extends Component {
                             <p className='content'>{product.text}</p>
                         </div>
                         <div className='right-column'>
+                            
                             <CommentsPage product={product} />
                         </div>
                     </div>

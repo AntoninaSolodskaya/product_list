@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Raiting from '../rating/Raiting';
 import './CommentsPage.css';
+import { createComment, loadAllComments } from './commentsAction';
 
 const mapState = state => ({
-    auth: state.auth
+    auth: state.auth,
+    comments: state.comments
 });
+
+const actions = {
+    createComment,
+    loadAllComments
+};
 
 class CommentsPage extends Component {
     state = {
@@ -27,29 +34,40 @@ class CommentsPage extends Component {
         let newData = date.toLocaleString();
 
         let newComment = {
-            id: Date.now(),
             text: this.state.text,
             time: newData,
-            _id: this.props.product._id,
-            name: this.props.auth.currentUser
+            productId: this.props.product._id,
+            name: this.props.auth.currentUser,
+            rating: this.state.rating
         };
         console.log(newComment);
         this.setState(prevState => ({
             comments: prevState.comments.concat(newComment),
             text: ''
         }));
+        this.props.createComment(newComment);
     };
 
     setRating = rating => {
         this.setState({ rating });
     };
 
+    componentDidMount() {
+        this.props.loadAllComments();
+        console.log(this.props.comments);
+    }
+
     render() {
         const { rating, totalStars } = this.state;
+        const { comments } = this.props;
         return (
             <div>
-                <Raiting rating={rating} totalStars={totalStars} setRating={this.setRating} />
-                <form onSubmit={this.onSubmit} className="comment-form">
+                <Raiting
+                    rating={rating}
+                    totalStars={totalStars}
+                    setRating={this.setRating}
+                />
+                <form onSubmit={this.onSubmit} className='comment-form'>
                     <textarea
                         placeholder='Enter Your Review'
                         onChange={this.handleTextChange}
@@ -66,23 +84,29 @@ class CommentsPage extends Component {
                 </form>
                 <div className='comment-title'>
                     <h3>Reviews</h3>
-                    <span className='badge'>{this.state.comments.length}</span>
+                    <span className='badge'>{comments.length}</span>
                 </div>
 
-                {this.state.comments.map((comment, index) => (
-                    <div className='comment-container'>
-                        <div className='comment-span'>
-                            <span className='comment-name'>{comment.name}</span>
-                            <span>{comment.time}</span>
+                {comments &&
+                    comments.map((comment, index) => (
+                        <div className='comment-container' key={index}>
+                            <div className='comment-span'>
+                                <span className='comment-name'>
+                                    {comment.name}
+                                </span>
+                                <span>{comment.time}</span>
+                            </div>
+                            <div className='comment-text'>
+                                <p>rating: {rating}</p>
+                                <p>{comment.text}</p>
+                            </div>
                         </div>
-                        <div className='comment-text'>
-                            <p>rating: {rating}</p>
-                            <p>{comment.text}</p>
-                        </div>
-                    </div>
-                ))}
+                    ))}
             </div>
         );
     }
 }
-export default connect(mapState)(CommentsPage);
+export default connect(
+    mapState,
+    actions
+)(CommentsPage);

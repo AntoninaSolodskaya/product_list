@@ -4,7 +4,7 @@ import './Product.css';
 
 class Product extends Component {
     render() {
-        const { product } = this.props;
+        const { product, comments } = this.props;
         return (
             <div className='product-section'>
                 <div className='image-wrap'>
@@ -13,7 +13,9 @@ class Product extends Component {
                     </Link>
                 </div>
                 <p className='title'>
-                    <Link to={`/product/${product._id}`} className="title-link">{product.title}</Link>
+                    <Link to={`/product/${product._id}`} className='title-link'>
+                        {product.title}
+                    </Link>
                 </p>
             </div>
         );
