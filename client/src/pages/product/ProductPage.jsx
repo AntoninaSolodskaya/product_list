@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ProductPage.css';
+import CommentsPage from '../../comments/CommentsPage';
 
 const mapState = (state, ownProps) => {
     const productId = ownProps.match.params.id;
@@ -39,7 +40,9 @@ class ProductPage extends Component {
                             </div>
                             <p className='content'>{product.text}</p>
                         </div>
-                        <div className='right-column'></div>
+                        <div className='right-column'>
+                            <CommentsPage product={product} />
+                        </div>
                     </div>
                 </div>
                 <div className='btn-wrap'>

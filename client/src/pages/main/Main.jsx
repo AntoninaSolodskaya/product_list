@@ -19,7 +19,6 @@ class Main extends Component {
     componentDidMount() {
         const token = localStorage.getItem('token');
         setAuthToken(token);
-        console.log('token', token);
         this.props.loadProducts();
     }
 

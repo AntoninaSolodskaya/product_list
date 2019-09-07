@@ -4,14 +4,14 @@ import './LoadingComponent.css';
 
 const LoadingComponent = () => {
   return (
-    <div className="wrapper">
-      <div className="container">
+    <div className="spinner-wrapper">
+      <div className="spinner-container">
         <Loader 
           type="Oval" 
           color="#ffffff" 
           height={40} width={40} 
         />
-        <span>Loading...</span>
+        <span className="spinner-text">Loading...</span>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-.wrapper {
+.spinner-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,9 +11,13 @@
     align-items: center;
 }
 
-.container {
+.spinner-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.spinner-text {
+    color: #ffffff;
 }
