@@ -40,7 +40,7 @@ class CommentsPage extends Component {
             name: this.props.auth.currentUser,
             rating: this.state.rating
         };
-        console.log(newComment);
+       
         this.setState(prevState => ({
             comments: prevState.comments.concat(newComment),
             text: ''
@@ -54,7 +54,6 @@ class CommentsPage extends Component {
 
     componentDidMount() {
         this.props.loadAllComments();
-        console.log(this.props.comments);
     }
 
     render() {
