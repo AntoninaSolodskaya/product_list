@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import CustomInput from '../../CustomInput';
 import { connect } from 'react-redux';
@@ -65,7 +65,7 @@ class RegisterForm extends Component {
                             />
 
                             {isErr && (
-                                <span>
+                                <span className="badge">
                                     It's password or name already exists
                                 </span>
                             )}

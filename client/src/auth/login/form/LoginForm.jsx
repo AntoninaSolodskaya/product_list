@@ -35,6 +35,7 @@ class LoginForm extends Component {
     render() {
         const { login, pristine, handleSubmit, submitting, auth } = this.props;
         const isErr = auth.isErr;
+        console.log(isErr)
         return (
             <div className='wrap'>
                 <form onSubmit={handleSubmit(login)}>
@@ -55,7 +56,7 @@ class LoginForm extends Component {
                                 component={CustomInput}
                                 className='form-control'
                             />
-                            {isErr && <span>Wrong password or email</span>}
+                            {isErr && <span className="badge">Wrong password or email</span>}
                         </div>
 
                         <div className='wrap-btn'>

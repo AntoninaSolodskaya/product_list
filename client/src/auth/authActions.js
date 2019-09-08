@@ -27,8 +27,12 @@ export const login = values => {
             });
         } catch (error) {
             console.log(error);
-            if (error.data.message === 'Incorrect password or name') {
+            if (error.status === 400) {
                 dispatch({ type: LOGIN_ERROR });
+                localStorage.clear();
+            } else if (error.status === 404) {
+                dispatch({ type: LOGIN_ERROR });
+                localStorage.clear();
             }
         }
     };
@@ -44,9 +48,10 @@ export const registerUser = values => {
             });
         } catch (error) {
             console.log(error);
-            if (error.status === 500) {
+            if (error.status === 400) {
                 dispatch({ type: REGISTER_ERROR });
-            }
+                localStorage.clear()
+            } 
         }
     };
 };

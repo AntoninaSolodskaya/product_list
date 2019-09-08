@@ -4,7 +4,7 @@ import './Product.css';
 
 class Product extends Component {
     render() {
-        const { product, comments } = this.props;
+        const { product } = this.props;
         return (
             <div className='product-section'>
                 <div className='image-wrap'>

@@ -1,7 +1,7 @@
 .comment-form {
-display: flex;
-flex-direction: column;
-align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 textarea {
@@ -14,6 +14,8 @@ textarea {
     border: 1px solid #b7b7b7;
     border-radius: 4px;
     font-size: 18px;
+    background: #ffffff;
+    font-family: 'Niconne', cursive;
 }
 
 .comment-btn {
@@ -27,8 +29,6 @@ textarea {
 
 h3 {
     padding: 20px 20px;
-    font-family: 'Niconne', cursive;
-    color: #4d4d4d;
 }
 
 .comment-container {
@@ -40,12 +40,12 @@ h3 {
     width: 80%;
     margin: 0 auto;
     margin-bottom: 20px;
+    background: #ffffff;
 }
 
 .comment-span {
     display: flex;
     align-items: flex-start;
-    color: #b7b7b7;
     font-size: 18px;
 }
 
@@ -57,6 +57,9 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: #b7b7b7;
     font-size: 18px;
+}
+
+.badge {
+    color: #ff0000;
 }

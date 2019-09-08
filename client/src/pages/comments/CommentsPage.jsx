@@ -59,7 +59,8 @@ class CommentsPage extends Component {
 
     render() {
         const { rating, totalStars } = this.state;
-        const { comments } = this.props;
+        const { comments, product, auth } = this.props;
+        const authenticated = auth.authenticated;
         return (
             <div>
                 <Raiting
@@ -75,33 +76,40 @@ class CommentsPage extends Component {
                         className='form-control'
                         name='message'
                     ></textarea>
-                    <button
-                        className='comment-btn'
-                        onClick={this.handleAddItem}
-                    >
-                        Submit review
-                    </button>
+                    {authenticated ? (
+                        <button
+                            className='comment-btn'
+                            onClick={this.handleAddItem}
+                        >
+                            Submit review
+                        </button>
+                    ) : (
+                        <span className='badge'>
+                            You must login to write reviews
+                        </span>
+                    )}
                 </form>
                 <div className='comment-title'>
                     <h3>Reviews</h3>
-                    <span className='badge'>{comments.length}</span>
                 </div>
 
                 {comments &&
-                    comments.map((comment, index) => (
-                        <div className='comment-container' key={index}>
-                            <div className='comment-span'>
-                                <span className='comment-name'>
-                                    {comment.name}
-                                </span>
-                                <span>{comment.time}</span>
+                    comments
+                        .filter(com => com.productId === product._id)
+                        .map((comment, index) => (
+                            <div className='comment-container' key={index}>
+                                <div className='comment-span'>
+                                    <span className='comment-name'>
+                                        {comment.name}
+                                    </span>
+                                    <span>{comment.time}</span>
+                                </div>
+                                <div className='comment-text'>
+                                    <p>rating: {rating}</p>
+                                    <p>{comment.text}</p>
+                                </div>
                             </div>
-                            <div className='comment-text'>
-                                <p>rating: {rating}</p>
-                                <p>{comment.text}</p>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
             </div>
         );
     }
