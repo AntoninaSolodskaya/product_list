@@ -104,7 +104,7 @@ class CommentsPage extends Component {
                                     <span>{comment.time}</span>
                                 </div>
                                 <div className='comment-text'>
-                                    <p>rating: {rating}</p>
+                                    <p>rating: {comment.rating}</p>
                                     <p>{comment.text}</p>
                                 </div>
                             </div>
