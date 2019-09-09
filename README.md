@@ -2,14 +2,7 @@
 
 Configuring App
 
-#backend
-
 cd backend
 npm install
-npm run server
+npm run dev
 
-#frontend
-
-cd client
-npm install
-npm run start
