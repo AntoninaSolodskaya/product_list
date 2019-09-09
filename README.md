@@ -5,17 +5,13 @@ cd product_list
 
 #backend
 
-cd backend
-***
-npm install
-***
-npm run server
+*cd backend
+*npm install
+*npm run server
 
 #frontend
 
-cd frontend
-***
-npm install
-***
-npm run start
+*cd frontend
+*npm install
+*npm run start
 
